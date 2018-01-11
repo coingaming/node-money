@@ -1,0 +1,47 @@
+{
+  "name": "@heathmont/money",
+  "version": "1.0.1",
+  "author": "Reio Piller",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "engines": {
+    "node": ">=8"
+  },
+  "dependencies": {
+    "@heathmont/money-config": "1.0.5"
+  },
+  "devDependencies": {
+    "@types/node": "8.0.1",
+    "tslint": "4.3.1",
+    "typescript": "2.6.2",
+    "@types/jest": "20.0.1",
+    "jest": "20.0.4",
+    "ts-jest": "20.0.6",
+    "babel-jest": "20.0.3"
+  },
+  "directories": {
+    "lib": "./dist"
+  },
+  "scripts": {
+    "publish-minor": "npm run test && npm version minor && npm publish && git push && git push --tags",
+    "compile": "tsc -p ./",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
+  },
+  "jest": {
+    "transform": {
+      ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx)$",
+    "testEnvironment": "node",
+    "roots": [
+      "<rootDir>/src/"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ]
+  }
+}
