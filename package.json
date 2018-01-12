@@ -1,6 +1,6 @@
 {
   "name": "@heathmont/money",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "author": "Reio Piller",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
