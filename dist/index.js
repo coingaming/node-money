@@ -10,15 +10,37 @@ function findConfig(currency) {
     }
     return config;
 }
-function toFloat(amount, currency) {
+function integerToBase(amount, currency) {
     const config = findConfig(currency);
-    return +amount * Math.pow(10, config.display.shift) / Math.pow(10, config.precision);
+    return Math.round(+amount) / Math.pow(10, config.precision);
 }
-exports.toFloat = toFloat;
-function toInteger(amount, currency) {
+exports.integerToBase = integerToBase;
+function integerToDisplay(amount, currency) {
     const config = findConfig(currency);
-    return +amount * Math.pow(10, config.precision) / Math.pow(10, config.display.shift);
+    return Math.round(+amount) / Math.pow(10, config.precision - config.display.shift);
 }
-exports.toInteger = toInteger;
-console.log(toInteger(111111222.33344, "BTCr"));
+exports.integerToDisplay = integerToDisplay;
+function integerToInput(amount, currency) {
+    const config = findConfig(currency);
+    return Math.round(+amount) / Math.pow(10, config.precision - config.display.shift);
+}
+exports.integerToInput = integerToInput;
+function baseToDisplay(amount, currency) {
+    return integerToDisplay(baseToInteger(amount, currency), currency);
+}
+exports.baseToDisplay = baseToDisplay;
+function baseToInput(amount, currency) {
+    return integerToInput(baseToInteger(amount, currency), currency);
+}
+exports.baseToInput = baseToInput;
+function baseToInteger(amount, currency) {
+    const config = findConfig(currency);
+    return Math.round(+amount * Math.pow(10, config.precision));
+}
+exports.baseToInteger = baseToInteger;
+function inputToInteger(amount, currency) {
+    const config = findConfig(currency);
+    return Math.round(+amount * Math.pow(10, config.precision - config.display.shift));
+}
+exports.inputToInteger = inputToInteger;
 //# sourceMappingURL=index.js.map
