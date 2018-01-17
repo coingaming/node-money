@@ -39,6 +39,6 @@ export function toInteger(amount: number | string, currency: string, unit: strin
 export function convertUnit(amount: number | string, currency: string, fromUnit: string, toUnit: string) {
 	const fromConfig = findConfig(currency, fromUnit);
 	const toConfig = findConfig(currency, toUnit);
-	const roundPrecision = Math.pow(10, Math.max(toConfig.displayPrecesion, toConfig.inputPrecession));
+	const roundPrecision = Math.pow(10, toConfig.precision - toConfig.shift);
 	return Math.round(+amount * Math.pow(10, toConfig.shift - fromConfig.shift) * roundPrecision) / roundPrecision;
 }
