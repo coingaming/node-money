@@ -1,45 +1,44 @@
 import * as moneyConfig from '@heathmont/money-config';
 import {keyBy} from 'lodash';
 
-const configByCode = keyBy(moneyConfig, 'code');
+interface Config {
+	precision: number;
+	symbol: string,
+	name: string,
+	displayPrecesion: number;
+	inputPrecession: number;
+	shift: number;
+}
 
-function findConfig(currency) {
-	const config = configByCode[currency];
-	if (!config) {
+function findConfig(currency, unit): Config {
+	const currencyConfig = moneyConfig[currency];
+	if (!currencyConfig) {
 		throw new Error(`Currency ${currency} not found`);
 	}
-	return config;
+	const unitConfig = currencyConfig.units[unit];
+	if (!unitConfig) {
+		throw new Error(`Currency unit ${currency} ${unit} not found`);
+	}
+	return Object.assign(unitConfig, {precision: currencyConfig.precision});
 }
 
-export function integerToBase(amount: number | string, currency: string) {
-	const config = findConfig(currency);
-	return Math.round(+amount) / Math.pow(10, config.precision);
+export function fromInteger(amount: number | string, currency: string, unit: string = null) {
+	const config = findConfig(currency, unit || currency);
+	const intAmount = +amount;
+	if (intAmount % 1 !== 0) {
+		throw new Error(`Expected integer amount, got ${amount}`);
+	}
+	return intAmount / Math.pow(10, config.precision - config.shift);
 }
 
-export function integerToDisplay(amount: number | string, currency: string) {
-	const config = findConfig(currency);
-	return Math.round(+amount) / Math.pow(10, config.precision - config.display.shift);
+export function toInteger(amount: number | string, currency: string, unit: string = null) {
+	const config = findConfig(currency, unit || currency);
+	return Math.round(+amount * Math.pow(10, config.precision - config.shift));
 }
 
-export function integerToInput(amount: number | string, currency: string) {
-	const config = findConfig(currency);
-	return Math.round(+amount) / Math.pow(10, config.precision - config.display.shift);
-}
-
-export function baseToDisplay(amount: number | string, currency: string) {
-	return integerToDisplay(baseToInteger(amount, currency), currency);
-}
-
-export function baseToInput(amount: number | string, currency: string) {
-	return integerToInput(baseToInteger(amount, currency), currency);
-}
-
-export function baseToInteger(amount: number | string, currency: string) {
-	const config = findConfig(currency);
-	return Math.round(+amount * Math.pow(10, config.precision));
-}
-
-export function inputToInteger(amount: number | string, currency: string) {
-	const config = findConfig(currency);
-	return Math.round(+amount * Math.pow(10, config.precision - config.display.shift));
+export function convertUnit(amount: number | string, currency: string, fromUnit: string, toUnit: string) {
+	const fromConfig = findConfig(currency, fromUnit);
+	const toConfig = findConfig(currency, toUnit);
+	const roundPrecision = Math.pow(10, Math.max(toConfig.displayPrecesion, toConfig.inputPrecession));
+	return Math.round(+amount * Math.pow(10, toConfig.shift - fromConfig.shift) * roundPrecision) / roundPrecision;
 }
