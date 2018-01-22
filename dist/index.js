@@ -1,46 +1,36 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const moneyConfig = require("@heathmont/money-config");
-const lodash_1 = require("lodash");
-const configByCode = lodash_1.keyBy(moneyConfig, 'code');
-function findConfig(currency) {
-    const config = configByCode[currency];
-    if (!config) {
+function findConfig(currency, unit) {
+    const currencyConfig = moneyConfig[currency];
+    if (!currencyConfig) {
         throw new Error(`Currency ${currency} not found`);
     }
-    return config;
+    const unitConfig = currencyConfig.units[unit];
+    if (!unitConfig) {
+        throw new Error(`Currency unit ${currency} ${unit} not found`);
+    }
+    return Object.assign(unitConfig, { precision: currencyConfig.precision });
 }
-function integerToBase(amount, currency) {
-    const config = findConfig(currency);
-    return Math.round(+amount) / Math.pow(10, config.precision);
+function fromInteger(amount, currency, unit = null) {
+    const config = findConfig(currency, unit || currency);
+    const intAmount = +amount;
+    if (intAmount % 1 !== 0) {
+        throw new Error(`Expected integer amount, got ${amount}`);
+    }
+    return intAmount / Math.pow(10, config.precision - config.shift);
 }
-exports.integerToBase = integerToBase;
-function integerToDisplay(amount, currency) {
-    const config = findConfig(currency);
-    return Math.round(+amount) / Math.pow(10, config.precision - config.display.shift);
+exports.fromInteger = fromInteger;
+function toInteger(amount, currency, unit = null) {
+    const config = findConfig(currency, unit || currency);
+    return Math.round(+amount * Math.pow(10, config.precision - config.shift));
 }
-exports.integerToDisplay = integerToDisplay;
-function integerToInput(amount, currency) {
-    const config = findConfig(currency);
-    return Math.round(+amount) / Math.pow(10, config.precision - config.display.shift);
+exports.toInteger = toInteger;
+function convertUnit(amount, currency, fromUnit, toUnit) {
+    const fromConfig = findConfig(currency, fromUnit);
+    const toConfig = findConfig(currency, toUnit);
+    const roundPrecision = Math.pow(10, toConfig.precision - toConfig.shift);
+    return Math.round(+amount * Math.pow(10, toConfig.shift - fromConfig.shift) * roundPrecision) / roundPrecision;
 }
-exports.integerToInput = integerToInput;
-function baseToDisplay(amount, currency) {
-    return integerToDisplay(baseToInteger(amount, currency), currency);
-}
-exports.baseToDisplay = baseToDisplay;
-function baseToInput(amount, currency) {
-    return integerToInput(baseToInteger(amount, currency), currency);
-}
-exports.baseToInput = baseToInput;
-function baseToInteger(amount, currency) {
-    const config = findConfig(currency);
-    return Math.round(+amount * Math.pow(10, config.precision));
-}
-exports.baseToInteger = baseToInteger;
-function inputToInteger(amount, currency) {
-    const config = findConfig(currency);
-    return Math.round(+amount * Math.pow(10, config.precision - config.display.shift));
-}
-exports.inputToInteger = inputToInteger;
+exports.convertUnit = convertUnit;
 //# sourceMappingURL=index.js.map
