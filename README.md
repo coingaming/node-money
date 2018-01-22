@@ -1,10 +1,10 @@
 ## Usage
 ```bash
-npm install --save "@heathmont/money-config"
+npm install --save "@heathmont/money"
 ```
 
 ```typescript
-import { toInteger, fromInteger, convertUnit } from "@heathmont/money-config";
+import { toInteger, fromInteger, convertUnit } from "@heathmont/money";
 ```
 
 ### toInteger(amount, currency, [unit])
