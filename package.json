@@ -1,19 +1,20 @@
 {
   "name": "@heathmont/money",
-  "version": "2.0.2",
+  "version": "2.1.1",
   "author": "Reio Piller",
+  "contributors": [
+    "Margus Lamp"
+  ],
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "engines": {
     "node": ">=8"
   },
   "dependencies": {
-    "@heathmont/money-config": "2.0.0",
-    "lodash": "4.17.4"
+    "@heathmont/money-config": "2.1.1"
   },
   "devDependencies": {
     "@types/jest": "20.0.1",
-    "@types/lodash": "^4.14.92",
     "@types/node": "8.0.1",
     "babel-jest": "20.0.3",
     "jest": "20.0.4",

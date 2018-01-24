@@ -1,7 +1,3 @@
-export declare function integerToBase(amount: number | string, currency: string): number;
-export declare function integerToDisplay(amount: number | string, currency: string): number;
-export declare function integerToInput(amount: number | string, currency: string): number;
-export declare function baseToDisplay(amount: number | string, currency: string): number;
-export declare function baseToInput(amount: number | string, currency: string): number;
-export declare function baseToInteger(amount: number | string, currency: string): number;
-export declare function inputToInteger(amount: number | string, currency: string): number;
+export declare function fromInteger(amount: number | string, currency: string, unit?: string): number;
+export declare function toInteger(amount: number | string, currency: string, unit?: string): number;
+export declare function convertUnit(amount: number | string, currency: string, fromUnit: string, toUnit: string): number;
