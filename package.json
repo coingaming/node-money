@@ -2,13 +2,16 @@
   "name": "@heathmont/money",
   "version": "2.0.4",
   "author": "Reio Piller",
+  "contributors": [
+    "Margus Lamp"
+  ],
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "engines": {
     "node": ">=8"
   },
   "dependencies": {
-    "@heathmont/money-config": "2.0.0",
+    "@heathmont/money-config": "2.1.0",
     "lodash": "4.17.4"
   },
   "devDependencies": {
