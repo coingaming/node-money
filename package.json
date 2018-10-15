@@ -5,6 +5,11 @@
   "contributors": [
     "Margus Lamp"
   ],
+  "homepage": "https://github.com/coingaming/node-money#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/coingaming/node-money.git"
+  },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "engines": {
