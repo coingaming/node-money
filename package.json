@@ -16,14 +16,14 @@
     "node": ">=8"
   },
   "dependencies": {
-    "@heathmont/money-config": "2.3.3"
+    "@heathmont/money-config": "2.3.5"
   },
   "devDependencies": {
     "@types/jest": "20.0.1",
     "@types/node": "8.0.1",
-    "babel-jest": "20.0.3",
-    "jest": "20.0.4",
-    "ts-jest": "20.0.6",
+    "babel-jest": "^24.8.0",
+    "jest": "^24.8.0",
+    "ts-jest": "^24.0.2",
     "tslint": "4.3.1",
     "typescript": "2.6.2"
   },
