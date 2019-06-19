@@ -30,6 +30,7 @@ describe('money', () => {
       expect(() => convertUnit(11111122233344, 'BTC', 'mBTC', 'abc')).toThrow();
       expect(() => convertUnit(11111122233344, 'BTC', 'abc', 'mBTC')).toThrow();
       expect(convertUnit(111111222.333443, 'BTC', 'mBTC', 'uBTC')).toBe(111111222333.44);
+      expect(convertUnit(1111112223, 'BTC', 'sat', 'mBTC')).toBe(11111.12223);
       expect(convertUnit(111111.223332, 'EUR', 'EUR', 'cent')).toBe(11111122.333);
    });
 
