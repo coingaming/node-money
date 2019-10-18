@@ -36,7 +36,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "prepack": "npm run lint && npm run compile",
+    "prepack": "npm run compile",
     "postpublish": "git push --follow-tags"
   },
   "jest": {
