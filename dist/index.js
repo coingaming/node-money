@@ -12,6 +12,7 @@ function findConfig(currency, unit) {
     }
     return Object.assign(unitConfig, { precision: currencyConfig.precision });
 }
+exports.findConfig = findConfig;
 function fromInteger(amount, currency, unit) {
     if (unit === void 0) { unit = null; }
     var config = findConfig(currency, unit || currency);
@@ -35,4 +36,9 @@ function convertUnit(amount, currency, fromUnit, toUnit) {
     return Math.round(+amount * Math.pow(10, toConfig.shift - fromConfig.shift) * roundPrecision) / roundPrecision;
 }
 exports.convertUnit = convertUnit;
+function getInputPrecision(currency) {
+    var config = findConfig(currency, currency);
+    return config.inputPrecision;
+}
+exports.getInputPrecision = getInputPrecision;
 //# sourceMappingURL=index.js.map
