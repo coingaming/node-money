@@ -33,6 +33,7 @@ describe ('money', () => {
   test ('getInputPrecision', () => {
     expect (getInputPrecision ('BTC')).toBe (8);
     expect (getInputPrecision ('TRX')).toBe (6);
+    expect (getInputPrecision ('USDT')).toBe (4);
   });
 
 });
