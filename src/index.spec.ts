@@ -5,7 +5,8 @@ describe ('money', () => {
   test ('toInteger', () => {
     expect (() => toInteger (111111.222333443, 'ABC')).toThrow ();
     expect (() => toInteger (111111.222333443, 'BTC', 'abc')).toThrow ();
-    expect (toInteger (111111.222333443, 'BTC')).toBe (11111122233344);
+    expect (toInteger (111111.222333448, 'BTC')).toBe (11111122233345);
+    expect (toInteger (111111.222333448, 'BTC', null, true)).toBe (11111122233344);
     expect (toInteger (111111222.333443, 'BTC', 'mBTC')).toBe (11111122233344);
     expect (toInteger (111111.223332, 'EUR')).toBe (11111122333);
     expect (toInteger (11111122.3332, 'EUR', 'cent')).toBe (11111122333);

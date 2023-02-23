@@ -30,9 +30,11 @@ export function fromInteger ( amount: number | string, currency: string, unit: s
   return intAmount / Math.pow (10, config.precision - config.shift);
 }
 
-export function toInteger ( amount: number | string, currency: string, unit: string = null ) {
+export function toInteger ( amount: number | string, currency: string, unit: string = null, floor = false ) {
   const config = findConfig (currency, unit || currency);
-  return Math.round (+amount * Math.pow (10, config.precision - config.shift));
+  return floor ?
+    Math.floor (+amount * Math.pow (10, config.precision - config.shift)) :
+    Math.round (+amount * Math.pow (10, config.precision - config.shift));
 }
 
 export function convertUnit ( amount: number | string, currency: string, fromUnit: string, toUnit: string ) {
