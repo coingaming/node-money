@@ -16,7 +16,7 @@
     "node": ">=8"
   },
   "dependencies": {
-    "@heathmont/money-config": "2.3.18"
+    "@heathmont/money-config": "2.3.20"
   },
   "devDependencies": {
     "@types/jest": "^25.2.1",

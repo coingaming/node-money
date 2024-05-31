@@ -23,10 +23,13 @@ function fromInteger(amount, currency, unit) {
     return intAmount / Math.pow(10, config.precision - config.shift);
 }
 exports.fromInteger = fromInteger;
-function toInteger(amount, currency, unit) {
+function toInteger(amount, currency, unit, floor) {
     if (unit === void 0) { unit = null; }
+    if (floor === void 0) { floor = false; }
     var config = findConfig(currency, unit || currency);
-    return Math.round(+amount * Math.pow(10, config.precision - config.shift));
+    return floor ?
+        Math.floor(+amount * Math.pow(10, config.precision - config.shift)) :
+        Math.round(+amount * Math.pow(10, config.precision - config.shift));
 }
 exports.toInteger = toInteger;
 function convertUnit(amount, currency, fromUnit, toUnit) {
