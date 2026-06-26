@@ -1,6 +1,6 @@
 {
   "name": "@heathmont/money",
-  "version": "2.4.24",
+  "version": "2.4.25",
   "author": "Reio Piller",
   "contributors": [
     "Margus Lamp"
@@ -16,7 +16,7 @@
     "node": ">=8"
   },
   "dependencies": {
-    "@heathmont/money-config": "2.3.24"
+    "@heathmont/money-config": "2.3.25"
   },
   "devDependencies": {
     "@types/jest": "^25.2.1",
